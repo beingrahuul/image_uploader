@@ -130,7 +130,7 @@ function Result({name, image}) {
       <Copy>
         <Input 
           type="text"
-          value={image}
+          defaultValue={image}
           readonly
         />
         <Button onClick={handleCopy}>{!loading ? "Copy Link" : <Loader />}</Button>
