@@ -8,7 +8,7 @@ const Container = styled.div`
   height: 600px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(167, 22, 41, 0.484);
+  box-shadow: 0px 4px 12px rgba(63, 63, 63, 0.484);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,7 +183,7 @@ const Card = () => {
       SetLoading(true);
       const data =  await convertBase64(form.image);
       const body = JSON.stringify({name: form.name, data: data});
-      const response  = await fetch("http://localhost:3000/api/v1/upload", {
+      const response  = await fetch("https://image-uploader-x8mr.onrender.com/api/v1/upload", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
