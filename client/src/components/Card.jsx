@@ -146,6 +146,20 @@ const Name = styled.input`
   padding: 5px;
 `
 
+const Drop = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #49494951;
+  font-size: 34px;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 12px;
+
+`
+
 const Card = () => {
 
   const [form, setForm] = useState({
@@ -154,6 +168,7 @@ const Card = () => {
   })
   const [loading, SetLoading] = useState(false)
   const [result, SetResult] = useState(null)
+  const [drag, setDrag] = useState(false)
 
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -209,14 +224,42 @@ const Card = () => {
       setForm({...form, [e.target.name]:e.target.value})
     }
   }
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setDrag(true);
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    const fileUploaded = e.dataTransfer.files[0];
+    if (fileUploaded.type == 'image/jpeg' || fileUploaded.type == 'image/png'){    
+      setForm({...form, "image":fileUploaded})
+      setDrag(false)
+    }else{
+      alert("Invalid file type");
+    }
+  }
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    setDrag(false);
+  }
+
   return (
     <Container>
       {!result && !loading &&  <>
         <Heading>Upload your image</Heading>
         <Para>File should be Jpeg, Png...</Para>
-        <Drag>
-          {form.image ? <Preview src={URL.createObjectURL(form.image)} /> : <Image src={Logo} onClick={handleClick}/>}
-          <Para color={'#BDBDBD'} font={'16px'}>Drag & Drop your image here</Para>
+        <Drag onDragOver={handleDragOver} onDrop={handleDrop} onDragLeave={handleDragLeave}>
+          {!drag ? (<>
+            {form.image ? <Preview src={URL.createObjectURL(form.image)} /> : <Image src={Logo} onClick={handleClick}/>}
+            <Para color={'#BDBDBD'} font={'16px'}>Drag & Drop your image here</Para>
+          </>
+          ) : (
+            <Drop>Drop</Drop>
+          )}
+          
         </Drag>
         <Para color={'#BDBDBD'} font={'16px'}>Or</Para>
         <Form>
