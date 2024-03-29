@@ -15,9 +15,9 @@ cloudinary.config({
 router.route('/').post(async (req, res) => {
   try {
     const {name, data} = req.body;
-    const photoUrl = await cloudinary.uploader.upload(data, {quality: "auto"});
+    const photoUrl = await cloudinary.uploader.upload(data);
     console.log(photoUrl)
-    res.status(200).send({photoUrl: photoUrl.url, name: name});
+    res.status(200).send({photoUrl: `${photoUrl.secure_url}?q_auto`, name: name});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'An internal server error occurred' });
