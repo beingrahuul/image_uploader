@@ -198,7 +198,7 @@ const Card = () => {
       SetLoading(true);
       const data =  await convertBase64(form.image);
       const body = JSON.stringify({name: form.name, data: data});
-      const response  = await fetch("http://localhost:8080/api/v1/upload", {
+      const response  = await fetch("https://image-uploader-x8mr.onrender.com/api/v1/upload", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -207,7 +207,6 @@ const Card = () => {
       })
 
       const result = await response.json()
-      console.log(result)
       SetResult(result)
     }catch(err){
       console.log(err)
