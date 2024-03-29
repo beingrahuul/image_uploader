@@ -13,7 +13,7 @@ app.use(express.json({limit: '50mb'}));
 app.use('/api/v1/upload', uploadRoutes);
 
 app.get("/", (req, res) => {
-  res.status(200).send("Hello World");
+  res.status(200).send("Hello image");
 })
 
 const startServer = (port) => {
@@ -22,4 +22,4 @@ const startServer = (port) => {
   })
 }
 
-startServer(3000);
+startServer(8080);

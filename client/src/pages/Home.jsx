@@ -21,10 +21,23 @@ const Link = styled.a`
   color: #000000;
 `
 
+const Reload = styled.button`
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #000000;
+  background-color: #8ebbff;
+  border: none;
+  cursor: pointer;
+`
+
+
 function Home() {
   return (
     <Container>
       <Card />
+      <Reload onClick={() => window.location.reload()}>Reload</Reload>
       <Created>Created by <Link href='https://beingrahuul.com/'>Beingrahuul</Link></Created>
     </Container>
   )

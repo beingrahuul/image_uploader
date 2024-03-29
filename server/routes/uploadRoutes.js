@@ -15,7 +15,8 @@ cloudinary.config({
 router.route('/').post(async (req, res) => {
   try {
     const {name, data} = req.body;
-    const photoUrl = await cloudinary.uploader.upload(data);
+    const photoUrl = await cloudinary.uploader.upload(data, {quality: "auto"});
+    console.log(photoUrl)
     res.status(200).send({photoUrl: photoUrl.url, name: name});
   } catch (err) {
     console.error(err);
